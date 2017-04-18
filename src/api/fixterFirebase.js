@@ -3,6 +3,7 @@
  */
 import firebase from 'firebase';
 import _ from 'lodash';
+import {browserHistory} from 'react-router';
 
 const config = {
   apiKey: "AIzaSyCF74a_S31pSmQb0ZqfbKLSRdO4XOPgv3k",
@@ -13,6 +14,10 @@ const config = {
   messagingSenderId: "192787601022"
 };
 firebase.initializeApp(config);
+const google = new firebase.auth.GoogleAuthProvider();
+const facebook = new firebase.auth.FacebookAuthProvider();
+
+
 
 export default {
   getAllData: function (rama) {
@@ -28,7 +33,10 @@ export default {
           });
           console.log('el array: ',array);
           return array;
-        });
+        })
+      .catch((e)=>{
+        console.log(e);
+      });
 
 
   },
@@ -50,5 +58,34 @@ export default {
       .then(() => {return true})
       .catch(err => console.log(err));
 
+  },
+
+  // login functions
+  googleLogin: function(stringProvider){
+    if (stringProvider === 'google'){
+      let provider = google;
+      return firebase.auth().signInWithPopup(provider)
+        .then(function(result) {
+        // var token = result.credential.accessToken;
+        return result.user;
+
+      }).catch(function(error) {
+        // Handle Errors here.
+          console.log(error);
+        // ...
+      });
+    }
+
+  },
+
+  logOut: function(){
+    return firebase.auth().signOut()
+      .then(function() {
+        localStorage.removeItem('user');
+        browserHistory.push('login');
+      return true
+    });
   }
-}
+
+
+} // objeto

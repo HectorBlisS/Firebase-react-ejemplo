@@ -5,6 +5,8 @@ import React from 'react';
 // import {Link} from 'react-router';
 import fixterFirebase from '../../api/fixterFirebase';
 import _ from 'lodash';
+import { browserHistory } from 'react-router'
+
 
 class HomePage extends React.Component {
   constructor(){
@@ -58,16 +60,18 @@ class HomePage extends React.Component {
 
   borrar(e){
     e.preventDefault();
-    // console.log(e.target.value);
-    let i = [];
-    if(fixterFirebase.delete('messages',e.target.value)){
-      _.remove(this.state.mensajes, {
-        id:e.target.value
+    if(confirm('seguro?')){
+      // console.log(e.target.value);
+      if(fixterFirebase.delete('messages',e.target.value)){
+        _.remove(this.state.mensajes, {
+          id:e.target.value
+        });
+      }
+      this.setState({
+        mensajes: this.state.mensajes
       });
     }
-    this.setState({
-      mensajes: this.state.mensajes
-    });
+
   }
 
   render(){
