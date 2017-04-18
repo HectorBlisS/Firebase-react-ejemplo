@@ -26,7 +26,7 @@ class Header extends React.Component {
                 <a class="navbar-brand" href="#!">
                   {localStorage.getItem('user') && <img width="50" alt="Brand" src={this.state.user.photoURL} />}
                 </a>
-                {localStorage.getItem('user') && <a className="navbar-right btn btn-danger navbar-btn" onClick={fixterFirebase.logOut} >Cerrar Sesión</a>}
+                  {localStorage.getItem('user') && <a className="navbar-right btn btn-danger navbar-btn" onClick={fixterFirebase.logOut} >Cerrar Sesión</a>}
               </div>
             </div>
           </nav>

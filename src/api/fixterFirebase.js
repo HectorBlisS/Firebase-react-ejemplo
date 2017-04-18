@@ -61,20 +61,41 @@ export default {
   },
 
   // login functions
-  googleLogin: function(stringProvider){
-    if (stringProvider === 'google'){
+  googleLogin: function(){
+
       let provider = google;
       return firebase.auth().signInWithPopup(provider)
         .then(function(result) {
         // var token = result.credential.accessToken;
-        return result.user;
+          let token = result.credential.accessToken;
+          localStorage.setItem('token', JSON.stringify(token));
+          return result.user;
 
       }).catch(function(error) {
         // Handle Errors here.
           console.log(error);
         // ...
       });
-    }
+
+
+  },
+
+  facebookLogin: function(){
+
+      let provider = facebook;
+      return firebase.auth().signInWithPopup(provider)
+        .then(function(result) {
+          // var token = result.credential.accessToken;
+          let token = result.credential.accessToken;
+          localStorage.setItem('token', JSON.stringify(token));
+          return result.user;
+
+        }).catch(function(error) {
+          // Handle Errors here.
+          console.log(error);
+          // ...
+        });
+
 
   },
 

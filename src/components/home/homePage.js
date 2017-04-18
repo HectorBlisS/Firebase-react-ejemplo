@@ -3,7 +3,8 @@
  */
 import React from 'react';
 // import {Link} from 'react-router';
-import fixterFirebase from '../../api/fixterFirebase';
+// import fixterFirebase from '../../api/fixterFirebase';
+import fixterFirebase from '../../api/djangoApi';
 import _ from 'lodash';
 import { browserHistory } from 'react-router'
 

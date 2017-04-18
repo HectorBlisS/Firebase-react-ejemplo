@@ -15,14 +15,27 @@ class Login extends React.Component {
 
     gLogin(e){
       e.preventDefault();
-      fixterFirebase.googleLogin('google')
+      fixterFirebase.googleLogin()
         .then(user=>{
           console.log(user.displayName);
           localStorage.setItem('user', JSON.stringify(user));
           alert('Hola pinche: ' + user.displayName);
+          console.log(localStorage.getItem('token'));
           browserHistory.push('/');
         });
     }
+
+  fLogin(e){
+    e.preventDefault();
+    fixterFirebase.facebookLogin()
+      .then(user=>{
+        console.log(user.displayName);
+        localStorage.setItem('user', JSON.stringify(user));
+        alert('Hola pinche: ' + user.displayName);
+        console.log(localStorage.getItem('token'));
+        browserHistory.push('/');
+      });
+  }
 
     render() {
         return (
@@ -31,7 +44,7 @@ class Login extends React.Component {
               <h1>Inicia sesión</h1>
               <p>Con: </p>
               <button onClick={this.gLogin} className="btn btn-danger">Google</button>
-              <button className="btn btn-primary">Facebook</button>
+              <button onClick={this.fLogin} className="btn btn-primary">Facebook</button>
             </div>
           </div>
         );
